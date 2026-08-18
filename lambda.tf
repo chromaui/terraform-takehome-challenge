@@ -22,7 +22,7 @@ resource "aws_lambda_permission" "apigw" {
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.api_lambda.function_name
   principal     = "apigateway.amazonaws.com"
-  source_arn    = format("%s/*/*", aws_api_gateway_rest_api.important_api.execution_arn)
+  source_arn    = format("%s/*/*", aws_apigatewayv2_api.important_api.execution_arn)
 }
 
 resource "aws_default_security_group" "lambda_security_group" {
@@ -74,7 +74,7 @@ resource "aws_lambda_function" "api_lambda" {
   handler          = "index.handler"
   filename         = data.archive_file.lambda_function_code.output_path
   source_code_hash = data.archive_file.lambda_function_code.output_base64sha256
-  runtime          = "nodejs20.x"
+  runtime          = "nodejs22.x"
   vpc_config {
     subnet_ids         = [aws_subnet.private[0].id]
     security_group_ids = [aws_default_security_group.lambda_security_group.id]
