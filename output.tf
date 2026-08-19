@@ -15,10 +15,10 @@ output "public_subnet_ids" {
 
 output "api_url" {
   description = "URL that can access the API Gateway REST endpoint"
-  value       = format("http://localhost:4566/_aws/execute-api/%s/%s", aws_api_gateway_rest_api.important_api.id, var.api-stage)
+  value       = format("http://localhost:4566/_aws/execute-api/%s/%s", aws_apigatewayv2_api.important_api.id, var.api-stage)
 }
 
 output "api_id" {
   description = "ID of the API Gateway instance"
-  value       = aws_api_gateway_rest_api.important_api.id
+  value       = aws_apigatewayv2_api.important_api.id
 }
